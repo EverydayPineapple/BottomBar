@@ -57,16 +57,16 @@ public class BadgeTest {
 
     @Test
     @UiThreadTest
-    public void whenBadgeCountIsZero_BadgeIsRemoved() {
-        nearby.setBadgeCount(0);
+    public void whenBadgeCountIsNegative_BadgeIsRemoved() {
+        nearby.setBadgeCount(-1);
         assertNull(nearby.badge);
     }
 
     @Test
     @UiThreadTest
-    public void whenBadgeCountIsNegative_BadgeIsRemoved() {
-        nearby.setBadgeCount(-1);
-        assertNull(nearby.badge);
+    public void whenBadgeCountIsZero_BadgeIsEmpty() {
+        nearby.setBadgeCount(0);
+        assertEquals(2, nearby.badge.getCount());
     }
 
     @Test

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -29,7 +30,7 @@ import android.widget.TextView;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class BottomBarBadge extends TextView {
+class BottomBarBadge extends AppCompatTextView {
     private int count;
     private boolean isVisible = false;
 
@@ -44,7 +45,15 @@ class BottomBarBadge extends TextView {
      */
     void setCount(int count) {
         this.count = count;
-        setText(String.valueOf(count));
+        if (count == 0) {
+            setBlank();
+        } else {
+            setText(String.valueOf(count));
+        }
+    }
+
+    private void setBlank() {
+        setText("");
     }
 
     /**

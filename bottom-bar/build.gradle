@@ -3,16 +3,16 @@ apply plugin: 'com.github.kt3k.coveralls'
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'bottom-bar'
+    bintrayName = 'com.everydaypineapple.bottombar'
 
-    publishedGroupId = 'com.roughike'
+    publishedGroupId = 'com.everydaypineapple'
     libraryName = 'bottom-bar'
     artifact = 'bottom-bar'
 
-    libraryDescription = 'A custom view component that mimics the Material Design "Bottom navigation" pattern.'
+    libraryDescription = 'A custom view component that mimics the Material Design "Bottom navigation" pattern. Forked to allow empty Badges'
 
-    siteUrl = 'https://github.com/roughike/BottomBar'
-    gitUrl = 'https://github.com/roughike/BottomBar.git'
+    siteUrl = 'https://github.com/EverydayPineapple/BottomBar'
+    gitUrl = 'https://github.com/EverydayPineapple/BottomBar.git'
 
     libraryVersion = '2.3.1'
 
@@ -63,8 +63,8 @@ dependencies {
     testCompile 'junit:junit:' + rootProject.ext.junitVersion
 
     androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
     androidTestCompile 'org.mockito:mockito-core:1.+'
     androidTestCompile "com.google.dexmaker:dexmaker:1.2"
     androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
