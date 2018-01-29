@@ -2,19 +2,19 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.kt3k.coveralls'
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'com.everydaypineapple.bottombar'
+    bintrayRepo = 'com.everydaypineapple.bottombar'
+    bintrayName = 'bottombar'
 
     publishedGroupId = 'com.everydaypineapple'
     libraryName = 'bottom-bar'
     artifact = 'bottom-bar'
 
-    libraryDescription = 'A custom view component that mimics the Material Design "Bottom navigation" pattern. Forked to allow empty Badges'
+    libraryDescription = 'A custom view component that mimics the Material Design "Bottom navigation" pattern.'
 
     siteUrl = 'https://github.com/EverydayPineapple/BottomBar'
     gitUrl = 'https://github.com/EverydayPineapple/BottomBar.git'
 
-    libraryVersion = '2.3.1'
+    libraryVersion = '2.3.2'
 
     developerId = 'roughike'
     developerName = 'Iiro Krankka'
@@ -44,6 +44,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    buildToolsVersion '26.0.2'
 }
 
 coveralls {
@@ -57,17 +58,14 @@ tasks.coveralls {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.ext.supportLibraryVersion"
-    implementation "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
-    testImplementation "com.android.support:support-annotations:$rootProject.ext.supportLibraryVersion"
+    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibraryVersion
+    compile 'com.android.support:design:' + rootProject.ext.supportLibraryVersion
 
     testCompile 'junit:junit:' + rootProject.ext.junitVersion
 
     androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'com.android.support.test:rules:1.0.1'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'org.mockito:mockito-core:1.+'
     androidTestCompile "com.google.dexmaker:dexmaker:1.2"
     androidTestCompile "com.google.dexmaker:dexmaker-mockito:1.2"
@@ -104,6 +102,10 @@ install {
                         name developerName
                         email developerEmail
                     }
+                    developer {
+                        id "EverydayPineapple"
+                        name "Ryan McClarnon"
+                    }
                 }
                 scm {
                     connection gitUrl
@@ -126,10 +128,10 @@ if (project.hasProperty("android")) { // Android libraries
         from android.sourceSets.main.java.srcDirs
     }
 
-    task javadoc(type: Javadoc) {
-        source = android.sourceSets.main.java.srcDirs
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    }
+//    task javadoc(type: Javadoc) {
+//        source = android.sourceSets.main.java.srcDirs
+//        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//    }
 } else { // Java libraries
     task sourcesJar(type: Jar, dependsOn: classes) {
         classifier = 'sources'
@@ -137,13 +139,13 @@ if (project.hasProperty("android")) { // Android libraries
     }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
 
 artifacts {
-    archives javadocJar
+//    archives javadocJar
     archives sourcesJar
 }
 
