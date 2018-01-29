@@ -66,7 +66,7 @@ public class BadgeTest {
     @UiThreadTest
     public void whenBadgeCountIsZero_BadgeIsEmpty() {
         nearby.setBadgeCount(0);
-        assertEquals(2, nearby.badge.getCount());
+        assertEquals(0, nearby.badge.getCount());
     }
 
     @Test
