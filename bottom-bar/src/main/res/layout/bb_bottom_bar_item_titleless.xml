@@ -5,6 +5,8 @@
         android:id="@+id/bb_bottom_bar_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/bb_default_icon_size"
+        android:minWidth="@dimen/bb_default_icon_size"
         android:layout_gravity="center" />
 
 </merge>

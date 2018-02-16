@@ -3,6 +3,7 @@ package com.roughike.bottombar;
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -68,6 +69,7 @@ public class BottomBarTab extends LinearLayout {
     private int indexInContainer;
     private int titleTextAppearanceResId;
     private Typeface titleTypeFace;
+    private float iconSize;
 
     BottomBarTab(Context context) {
         super(context);
@@ -87,6 +89,7 @@ public class BottomBarTab extends LinearLayout {
         setBadgeHidesWhenActive(config.badgeHidesWhenSelected);
         setTitleTextAppearance(config.titleTextAppearance);
         setTitleTypeface(config.titleTypeFace);
+        setIconSize(config.iconSize);
     }
 
     void prepareLayout() {
@@ -98,6 +101,7 @@ public class BottomBarTab extends LinearLayout {
 
         iconView = (AppCompatImageView) findViewById(R.id.bb_bottom_bar_icon);
         iconView.setImageResource(iconResId);
+        applyIconSize();
 
         if (type != Type.TABLET && !isTitleless) {
             titleView = (TextView) findViewById(R.id.bb_bottom_bar_title);
@@ -381,6 +385,15 @@ public class BottomBarTab extends LinearLayout {
         return titleTypeFace;
     }
 
+    private void setIconSize(Float size) {
+        this.iconSize = size;
+    }
+
+    private void applyIconSize() {
+        this.iconView.getLayoutParams().height = MiscUtils.dpToPixel(getContext(), iconSize);
+        this.iconView.getLayoutParams().width = MiscUtils.dpToPixel(getContext(), iconSize);
+    }
+
     void select(boolean animate) {
         isActive = true;
 
@@ -650,6 +663,7 @@ public class BottomBarTab extends LinearLayout {
         private final int titleTextAppearance;
         private final Typeface titleTypeFace;
         private boolean badgeHidesWhenSelected = true;
+        private final float iconSize;
 
         private Config(Builder builder) {
             this.inActiveTabAlpha = builder.inActiveTabAlpha;
@@ -661,6 +675,7 @@ public class BottomBarTab extends LinearLayout {
             this.badgeHidesWhenSelected = builder.hidesBadgeWhenSelected;
             this.titleTextAppearance = builder.titleTextAppearance;
             this.titleTypeFace = builder.titleTypeFace;
+            this.iconSize = builder.iconSize;
         }
 
         public static class Builder {
@@ -673,6 +688,7 @@ public class BottomBarTab extends LinearLayout {
             private boolean hidesBadgeWhenSelected = true;
             private int titleTextAppearance;
             private Typeface titleTypeFace;
+            private float iconSize;
 
             public Builder inActiveTabAlpha(float alpha) {
                 this.inActiveTabAlpha = alpha;
@@ -716,6 +732,11 @@ public class BottomBarTab extends LinearLayout {
 
             public Builder titleTypeFace(Typeface titleTypeFace) {
                 this.titleTypeFace = titleTypeFace;
+                return this;
+            }
+
+            public Builder iconSize(float size) {
+                this.iconSize = size;
                 return this;
             }
 
