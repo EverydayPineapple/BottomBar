@@ -159,7 +159,7 @@ class BottomBarBadge extends AppCompatTextView {
         float xOffset = (float) (iconView.getWidth() / 1.5);
 
         setX(iconView.getX() + xOffset);
-        setTranslationY(5);
+        setTranslationY(10);
 
         if (params.width != size || params.height != size) {
             params.width = size;
