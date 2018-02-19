@@ -70,6 +70,7 @@ public class BottomBarTab extends LinearLayout {
     private int titleTextAppearanceResId;
     private Typeface titleTypeFace;
     private float iconSize;
+    private int badgeStyle;
 
     BottomBarTab(Context context) {
         super(context);
@@ -90,6 +91,7 @@ public class BottomBarTab extends LinearLayout {
         setTitleTextAppearance(config.titleTextAppearance);
         setTitleTypeface(config.titleTypeFace);
         setIconSize(config.iconSize);
+        setBadgeStyle(config.badgeStyle);
     }
 
     void prepareLayout() {
@@ -292,6 +294,10 @@ public class BottomBarTab extends LinearLayout {
         this.badgeHidesWhenActive = hideWhenActive;
     }
 
+    public void setBadgeStyle(final int badgeStyle) {
+        this.badgeStyle = badgeStyle;
+    }
+
     int getCurrentDisplayedIconColor() {
         Object tag = iconView.getTag(R.id.bb_bottom_bar_color_id);
 
@@ -332,7 +338,7 @@ public class BottomBarTab extends LinearLayout {
 
         if (badge == null) {
             badge = new BottomBarBadge(getContext());
-            badge.attachToTab(this, badgeBackgroundColor);
+            badge.attachToTab(this, badgeBackgroundColor, badgeStyle);
         }
 
         badge.setCount(count);
@@ -664,6 +670,7 @@ public class BottomBarTab extends LinearLayout {
         private final Typeface titleTypeFace;
         private boolean badgeHidesWhenSelected = true;
         private final float iconSize;
+        private final int badgeStyle;
 
         private Config(Builder builder) {
             this.inActiveTabAlpha = builder.inActiveTabAlpha;
@@ -676,6 +683,7 @@ public class BottomBarTab extends LinearLayout {
             this.titleTextAppearance = builder.titleTextAppearance;
             this.titleTypeFace = builder.titleTypeFace;
             this.iconSize = builder.iconSize;
+            this.badgeStyle = builder.badgeStyle;
         }
 
         public static class Builder {
@@ -689,6 +697,7 @@ public class BottomBarTab extends LinearLayout {
             private int titleTextAppearance;
             private Typeface titleTypeFace;
             private float iconSize;
+            private int badgeStyle;
 
             public Builder inActiveTabAlpha(float alpha) {
                 this.inActiveTabAlpha = alpha;
@@ -737,6 +746,11 @@ public class BottomBarTab extends LinearLayout {
 
             public Builder iconSize(float size) {
                 this.iconSize = size;
+                return this;
+            }
+
+            public Builder badgeStyle(int style) {
+                this.badgeStyle = style;
                 return this;
             }
 

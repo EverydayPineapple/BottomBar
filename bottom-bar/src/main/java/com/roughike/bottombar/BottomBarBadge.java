@@ -100,13 +100,13 @@ class BottomBarBadge extends AppCompatTextView {
         return isVisible;
     }
 
-    void attachToTab(BottomBarTab tab, int backgroundColor) {
+    void attachToTab(BottomBarTab tab, int backgroundColor, int style) {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         setLayoutParams(params);
         setGravity(Gravity.CENTER);
-        MiscUtils.setTextAppearance(this, R.style.BB_BottomBarBadge_Text);
+        MiscUtils.setTextAppearance(this, style);
 
         setColoredCircleBackground(backgroundColor);
         wrapTabAndBadgeInSameContainer(tab);
@@ -156,10 +156,10 @@ class BottomBarBadge extends AppCompatTextView {
         ViewGroup.LayoutParams params = getLayoutParams();
 
         int size = Math.max(getWidth(), getHeight());
-        float xOffset = (float) (iconView.getWidth() / 1.25);
+        float xOffset = (float) (iconView.getWidth() / 1.5);
 
         setX(iconView.getX() + xOffset);
-        setTranslationY(10);
+        setTranslationY(5);
 
         if (params.width != size || params.height != size) {
             params.width = size;

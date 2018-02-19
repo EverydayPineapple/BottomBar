@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/bb_bottom_bar_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:src="@color/bb_darkBackgroundColor"
+        android:layout_gravity="center_horizontal|top"
+        android:paddingTop="@dimen/bb_default_icon_size"
+        android:layout_centerVertical="true"
         android:minHeight="@dimen/bb_default_icon_size"
         android:minWidth="@dimen/bb_default_icon_size"/>
 
@@ -21,8 +19,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/BB_BottomBarItem_Fixed.TitleAppearance"
         android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="Inbox"
+        android:layout_gravity="bottom|center_horizontal"
         style="@style/BB_BottomBarItem_TitleStyle"/>
-
-    </LinearLayout>
 
 </merge>
