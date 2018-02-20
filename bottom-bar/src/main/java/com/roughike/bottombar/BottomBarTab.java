@@ -69,7 +69,6 @@ public class BottomBarTab extends LinearLayout {
     private int indexInContainer;
     private int titleTextAppearanceResId;
     private Typeface titleTypeFace;
-    private Float iconSize;
     private int badgeStyle;
 
     BottomBarTab(Context context) {
@@ -90,7 +89,6 @@ public class BottomBarTab extends LinearLayout {
         setBadgeHidesWhenActive(config.badgeHidesWhenSelected);
         setTitleTextAppearance(config.titleTextAppearance);
         setTitleTypeface(config.titleTypeFace);
-        setIconSize(config.iconSize);
         setBadgeStyle(config.badgeStyle);
     }
 
@@ -106,7 +104,6 @@ public class BottomBarTab extends LinearLayout {
 
         iconView = (AppCompatImageView) findViewById(R.id.bb_bottom_bar_icon);
         iconView.setImageResource(iconResId);
-        applyIconSize();
 
         if (type != Type.TABLET && !isTitleless) {
             titleView = (TextView) findViewById(R.id.bb_bottom_bar_title);
@@ -394,17 +391,6 @@ public class BottomBarTab extends LinearLayout {
         return titleTypeFace;
     }
 
-    private void setIconSize(Float size) {
-        this.iconSize = size;
-    }
-
-    private void applyIconSize() {
-        if (iconSize != null) {
-            iconView.getLayoutParams().height = MiscUtils.dpToPixel(getContext(), iconSize);
-            iconView.getLayoutParams().width = MiscUtils.dpToPixel(getContext(), iconSize);
-        }
-    }
-
     void select(boolean animate) {
         isActive = true;
 
@@ -674,7 +660,6 @@ public class BottomBarTab extends LinearLayout {
         private final int titleTextAppearance;
         private final Typeface titleTypeFace;
         private boolean badgeHidesWhenSelected = true;
-        private final Float iconSize;
         private final int badgeStyle;
 
         private Config(Builder builder) {
@@ -687,7 +672,6 @@ public class BottomBarTab extends LinearLayout {
             this.badgeHidesWhenSelected = builder.hidesBadgeWhenSelected;
             this.titleTextAppearance = builder.titleTextAppearance;
             this.titleTypeFace = builder.titleTypeFace;
-            this.iconSize = builder.iconSize;
             this.badgeStyle = builder.badgeStyle;
         }
 
@@ -701,7 +685,6 @@ public class BottomBarTab extends LinearLayout {
             private boolean hidesBadgeWhenSelected = true;
             private int titleTextAppearance;
             private Typeface titleTypeFace;
-            private Float iconSize;
             private int badgeStyle;
 
             public Builder inActiveTabAlpha(float alpha) {
@@ -746,11 +729,6 @@ public class BottomBarTab extends LinearLayout {
 
             public Builder titleTypeFace(Typeface titleTypeFace) {
                 this.titleTypeFace = titleTypeFace;
-                return this;
-            }
-
-            public Builder iconSize(Float size) {
-                this.iconSize = size;
                 return this;
             }
 

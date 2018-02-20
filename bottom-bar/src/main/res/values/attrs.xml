@@ -19,7 +19,6 @@
         <attr name="bb_titleTextAppearance" format="reference" />
         <attr name="bb_titleTypeFace" format="string" />
         <attr name="bb_showShadow" format="boolean" />
-        <attr name="bb_iconSize" format="dimension" />
         <attr name="bb_badgeStyle" format="reference" />
     </declare-styleable>
 </resources>
