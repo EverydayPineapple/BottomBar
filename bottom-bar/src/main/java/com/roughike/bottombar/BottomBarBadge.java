@@ -108,12 +108,13 @@ class BottomBarBadge extends AppCompatTextView {
         setGravity(Gravity.CENTER);
         MiscUtils.setTextAppearance(this, style);
 
+        setIncludeFontPadding(false);
         setColoredCircleBackground(backgroundColor);
         wrapTabAndBadgeInSameContainer(tab);
     }
 
     void setColoredCircleBackground(int circleColor) {
-        int innerPadding = MiscUtils.dpToPixel(getContext(), 1);
+        int innerPadding = MiscUtils.dpToPixel(getContext(), 4);
         ShapeDrawable backgroundCircle = BadgeCircle.make(innerPadding * 3, circleColor);
         setPadding(innerPadding, innerPadding, innerPadding, innerPadding);
         setBackgroundCompat(backgroundCircle);
