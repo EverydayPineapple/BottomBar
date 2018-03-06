@@ -9,6 +9,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -47,8 +48,10 @@ class BottomBarBadge extends AppCompatTextView {
         this.count = count;
         if (count == 0) {
             setBlank();
+            setScale(0.6f);
         } else {
             setText(String.valueOf(count));
+            setScale(1f);
         }
     }
 
@@ -89,6 +92,11 @@ class BottomBarBadge extends AppCompatTextView {
                 .scaleX(0)
                 .scaleY(0)
                 .start();
+    }
+
+    private void setScale(float scale) {
+        setScaleX(scale);
+        setScaleY(scale);
     }
 
     /**
