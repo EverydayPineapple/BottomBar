@@ -47,16 +47,12 @@ class BottomBarBadge extends AppCompatTextView {
     void setCount(int count) {
         this.count = count;
         if (count == 0) {
-            setBlank();
+            setText("");
             setScale(0.6f);
         } else {
             setText(String.valueOf(count));
             setScale(1f);
         }
-    }
-
-    private void setBlank() {
-        setText("");
     }
 
     /**

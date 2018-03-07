@@ -44,7 +44,6 @@ public class BadgeTest {
     }
 
     @Test
-    @UiThreadTest
     public void whenTabWithBadgeClicked_BadgeIsHidden() {
         InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable() {
             @Override
@@ -64,9 +63,10 @@ public class BadgeTest {
 
     @Test
     @UiThreadTest
-    public void whenBadgeCountIsZero_BadgeIsEmpty() {
+    public void whenBadgeCountIsZero_BadgeIsEmptyAndSmall() {
         nearby.setBadgeCount(0);
         assertEquals(0, nearby.badge.getCount());
+        assertEquals(0.6f, nearby.badge.getScaleX());
     }
 
     @Test
