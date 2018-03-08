@@ -135,7 +135,6 @@ public class BottomBarTest {
     }
 
     @Test
-    @UiThreadTest
     public void setOverrideTabSelectionListener_allowingSelection() {
         bottomBar.setTabSelectionInterceptor(tabSelectionInterceptor);
 
@@ -156,7 +155,6 @@ public class BottomBarTest {
     }
 
     @Test
-    @UiThreadTest
     public void setOverrideTabSelectionListener_whenNoListenerSet() {
         bottomBar.removeOverrideTabSelectionListener();
 

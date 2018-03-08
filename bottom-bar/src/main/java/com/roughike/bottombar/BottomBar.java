@@ -399,23 +399,41 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
         activeShiftingItemWidth = (int) (proposedItemWidth + (proposedItemWidth * ((tabsToAdd.length - 1) * 0.1)));
         int height = Math.round(getContext().getResources()
                                             .getDimension(R.dimen.bb_height));
-
-        for (BottomBarTab tabView : tabsToAdd) {
-            ViewGroup.LayoutParams params = tabView.getLayoutParams();
+        int width;
+        BottomBarTab tabView;
+        ViewGroup.LayoutParams params;
+        boolean isParamsChanged;
+        for (int i = 0; i < tabsToAdd.length; i++) {
+            tabView = tabsToAdd[i];
+            params = tabView.getLayoutParams();
             params.height = height;
 
             if (isShiftingMode()) {
                 if (tabView.isActive()) {
-                    params.width = activeShiftingItemWidth;
+                    width = activeShiftingItemWidth;
                 } else {
-                    params.width = inActiveShiftingItemWidth;
+                    width = inActiveShiftingItemWidth;
                 }
             } else {
-                params.width = proposedItemWidth;
+                width = proposedItemWidth;
+            }
+
+            if (params.height != height || params.width != width) {
+                params.height = height;
+                params.width = width;
+                isParamsChanged = true;
+            } else {
+                isParamsChanged = false;
             }
 
             if (tabView.getParent() == null) {
-                tabContainer.addView(tabView);
+                if (ViewCompat.isInLayout(this)) {
+                    tabContainer.addView(tabView);
+                } else {
+                    tabContainer.addView(tabView, i, params);
+                }
+            } else if (isParamsChanged) {
+                tabView.setLayoutParams(params);
             }
 
             tabView.setLayoutParams(params);
@@ -764,45 +782,12 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
                 resizeTabsToCorrectSizes(currentTabs);
             }
 
-            updateTitleBottomPadding();
-
             if (isShy()) {
                 initializeShyBehavior();
             }
 
             if (drawUnderNav()) {
                 resizeForDrawingUnderNavbar();
-            }
-        }
-    }
-
-    private void updateTitleBottomPadding() {
-        if (isIconsOnlyMode()) {
-            return;
-        }
-
-        int tabCount = getTabCount();
-
-        if (tabContainer == null || tabCount == 0 || !isShiftingMode()) {
-            return;
-        }
-
-        for (int i = 0; i < tabCount; i++) {
-            BottomBarTab tab = getTabAtPosition(i);
-            TextView title = tab.getTitleView();
-
-            if (title == null) {
-                continue;
-            }
-
-            int baseline = title.getBaseline();
-            int height = title.getHeight();
-            int paddingInsideTitle = height - baseline;
-            int missingPadding = tenDp - paddingInsideTitle;
-
-            if (missingPadding > 0) {
-                title.setPadding(title.getPaddingLeft(), title.getPaddingTop(),
-                        title.getPaddingRight(), missingPadding + title.getPaddingBottom());
             }
         }
     }
