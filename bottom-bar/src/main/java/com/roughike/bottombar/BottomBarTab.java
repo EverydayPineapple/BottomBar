@@ -341,6 +341,7 @@ public class BottomBarTab extends LinearLayout {
         }
 
         badge.setCount(count);
+        badge.setScale();
 
         if (isActive && badgeHidesWhenActive) {
             badge.hide();
@@ -514,12 +515,6 @@ public class BottomBarTab extends LinearLayout {
         }, animator.getDuration());
 
         animator.start();
-    }
-
-    private void updateBadgePosition() {
-        if (badge != null) {
-            badge.adjustPositionAndSize(this);
-        }
     }
 
     private void setTopPaddingAnimated(int start, int end) {

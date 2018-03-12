@@ -4,16 +4,12 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.TextView;
 
 /*
  * BottomBar library for Android
@@ -48,10 +44,8 @@ class BottomBarBadge extends AppCompatTextView {
         this.count = count;
         if (count == 0) {
             setText("");
-            setScale(0.6f);
         } else {
             setText(String.valueOf(count));
-            setScale(1f);
         }
     }
 
@@ -72,8 +66,8 @@ class BottomBarBadge extends AppCompatTextView {
         ViewCompat.animate(this)
                 .setDuration(150)
                 .alpha(1)
-                .scaleX(1)
-                .scaleY(1)
+                .scaleX(getScale())
+                .scaleY(getScale())
                 .start();
     }
 
@@ -90,9 +84,23 @@ class BottomBarBadge extends AppCompatTextView {
                 .start();
     }
 
-    private void setScale(float scale) {
+    /**
+     * Sets the badge scale
+     */
+    void setScale() {
+        float scale = getScale();
         setScaleX(scale);
         setScaleY(scale);
+        ViewCompat.animate(this)
+                .setDuration(150)
+                .scaleX(scale)
+                .scaleY(scale)
+                .translationY(scale == 1f ? 5 : -10)
+                .start();
+    }
+
+    private float getScale() {
+        return count == 0 ? 0.6f : 1f;
     }
 
     /**
@@ -164,7 +172,8 @@ class BottomBarBadge extends AppCompatTextView {
         float xOffset = (float) (iconView.getWidth() / 1.5);
 
         setX(iconView.getX() + xOffset);
-        setTranslationY(10);
+        setTranslationY(5);
+        setScale();
 
         if (params.width != size || params.height != size) {
             params.width = size;
