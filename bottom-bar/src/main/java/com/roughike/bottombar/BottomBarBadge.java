@@ -90,6 +90,10 @@ class BottomBarBadge extends AppCompatTextView {
     void setScale() {
         float scale = getScale();
         setTranslationY(scale == 1f ? 5 : -5);
+        if (getScaleX() != scale) {
+            setScaleX(0);
+            setScaleY(0);
+        }
         ViewCompat.animate(this)
                 .setDuration(150)
                 .scaleX(scale)

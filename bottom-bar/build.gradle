@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/EverydayPineapple/BottomBar'
     gitUrl = 'https://github.com/EverydayPineapple/BottomBar.git'
 
-    libraryVersion = '2.3.39'
+    libraryVersion = '2.3.311'
 
     originalDeveloperId = 'roughike'
     originalDeveloperName = 'Iiro Krankka'
