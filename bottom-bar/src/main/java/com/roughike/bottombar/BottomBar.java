@@ -77,6 +77,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
     private int inActiveTabColor;
     private int activeTabColor;
     private int badgeBackgroundColor;
+    private int badgeTextColor;
     private boolean hideBadgeWhenActive;
     private boolean longPressHintsEnabled;
     private int titleTextAppearance;
@@ -214,6 +215,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
             titleTypeFace = getTypeFaceFromAsset(ta.getString(R.styleable.BottomBar_bb_titleTypeFace));
             showShadow = ta.getBoolean(R.styleable.BottomBar_bb_showShadow, true);
             badgeStyle = ta.getResourceId(R.styleable.BottomBar_bb_badgeStyle, R.style.BB_BottomBarBadge_Text);
+            badgeTextColor = Color.WHITE;
         } finally {
             ta.recycle();
         }
@@ -320,6 +322,7 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
                 .activeTabColor(activeTabColor)
                 .barColorWhenSelected(defaultBackgroundColor)
                 .badgeBackgroundColor(badgeBackgroundColor)
+                .badgeTextColor(badgeTextColor)
                 .hideBadgeWhenSelected(hideBadgeWhenActive)
                 .titleTextAppearance(titleTextAppearance)
                 .titleTypeFace(titleTypeFace)
@@ -714,6 +717,20 @@ public class BottomBar extends LinearLayout implements View.OnClickListener, Vie
             @Override
             public void update(BottomBarTab tab) {
                 tab.setBadgeBackgroundColor(badgeBackgroundColor);
+            }
+        });
+    }
+
+    /**
+     * Set text color for the badge.
+     */
+    public void setBadgeTextColor(@ColorInt int color) {
+        badgeTextColor = color;
+
+        batchPropertyApplier.applyToAllTabs(new BatchTabPropertyApplier.TabPropertyUpdater() {
+            @Override
+            public void update(BottomBarTab tab) {
+                tab.setBadgeTextColor(badgeTextColor);
             }
         });
     }

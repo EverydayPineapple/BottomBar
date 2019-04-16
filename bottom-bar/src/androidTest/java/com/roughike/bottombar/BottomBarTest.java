@@ -526,6 +526,37 @@ public class BottomBarTest {
 
     @Test
     @UiThreadTest
+    public void setBadgeTextColor_UpdatesColor() {
+        BottomBarTab inActiveTab = bottomBar.getTabAtPosition(1);
+        inActiveTab.setBadgeCount(3);
+
+        int previousBadgeColor = inActiveTab.getBadgeTextColor();
+        int testColor = Color.GREEN;
+        assertNotEquals(testColor, previousBadgeColor);
+
+        bottomBar.setBadgeTextColor(testColor);
+        assertEquals(testColor, inActiveTab.getBadgeTextColor());
+    }
+
+    @Test
+    public void setBadgeTextColor_LeavesOtherValuesIntact() {
+        bottomBar.setBadgeTextColor(Color.BLUE);
+
+        BottomBarTab inActiveTab = bottomBar.getTabAtPosition(1);
+        assertNotEquals(inActiveTab, bottomBar.getCurrentTab());
+
+        assertEquals(INACTIVE_TAB_ALPHA, inActiveTab.getInActiveAlpha(), 0);
+        assertEquals(ACTIVE_TAB_ALPHA, inActiveTab.getActiveAlpha(), 0);
+        assertEquals(INACTIVE_TAB_COLOR, inActiveTab.getInActiveColor());
+        assertEquals(ACTIVE_TAB_COLOR, inActiveTab.getActiveColor());
+        assertEquals(BACKGROUND_COLOR, inActiveTab.getBarColorWhenSelected());
+        assertEquals(Color.BLUE, inActiveTab.getBadgeBackgroundColor());
+        assertEquals(TITLE_TEXT_APPEARANCE, inActiveTab.getTitleTextAppearance());
+        assertEquals(TYPEFACE, inActiveTab.getTitleTypeFace());
+    }
+
+    @Test
+    @UiThreadTest
     public void setBadgeHidesWhenSelected_UpdatesBadgeHidesWhenSelected() {
         BottomBarTab tab = bottomBar.getCurrentTab();
 
